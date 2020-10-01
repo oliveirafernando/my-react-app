@@ -1,26 +1,43 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
 import './App.css';
+import { Imc } from './components/Imc';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      pessoas: [
+        {
+          nome: 'Fernando',
+          peso: 82,
+          altura: 180,
+          imc: 82 / (180 * 180),
+        },
+      ],
+    };
+  }
+
+  addPessoa(event) {
+    // Pesquisar um formato de receber os objetos do Form quando ele for submetido
+
+    const newPessoa = {
+      nome: 'Fabiana',
+      peso: 54,
+      altura: 160,
+      imc: 54 / (160 * 160),
+    };
+    this.setState({ pessoas: [...this.state.pessoas, newPessoa] });
+  }
+
+  render() {
+    return (
+      <Imc
+        onAddPessoa={(event) => this.addPessoa(event)}
+        pessoas={this.state.pessoas}
+      />
+    );
+  }
 }
 
 export default App;
